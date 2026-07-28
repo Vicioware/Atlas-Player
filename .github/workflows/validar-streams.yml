@@ -61,7 +61,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ runner.temp }}/ffmpeg-extension-picky
-          key: ffmpeg-extension-picky-${{ runner.os }}-git-v1
+          key: ffmpeg-extension-picky-${{ runner.os }}-git-v2
 
       - name: Compilar FFmpeg actual
         if: steps.cache-ffmpeg.outputs.cache-hit != 'true'
@@ -74,7 +74,6 @@ jobs:
             --disable-debug \
             --disable-doc \
             --disable-ffplay \
-            --disable-postproc \
             --enable-gpl \
             --enable-gnutls \
             --enable-libass \
