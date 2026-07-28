@@ -1,1 +1,12 @@
-reports/
+__pycache__/
+*.py[cod]
+
+# Archivos generados por ejecución local o GitHub Actions
+playlists-combinadas.m3u
+funcionales.m3u
+descartados.m3u
+reporte.json
+
+# Entornos virtuales
+.venv/
+venv/

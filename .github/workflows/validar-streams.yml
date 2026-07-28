@@ -1,0 +1,87 @@
+name: Validar streams M3U
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * *"
+  push:
+    branches:
+      - main
+    paths:
+      - "script.py"
+      - "build_input_playlist.py"
+      - "playlists-urls.txt"
+      - ".github/workflows/validar-streams.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validar:
+    name: Validar playlists
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+
+    steps:
+      - name: Obtener repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: requirements.txt
+
+      - name: Instalar FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends ffmpeg
+          ffmpeg -version
+
+      - name: Verificar soporte extension_picky
+        run: |
+          if ! ffmpeg -hide_banner -h demuxer=hls 2>&1 | grep -q "extension_picky"; then
+            echo "::error::El FFmpeg instalado no incluye la opción extension_picky."
+            exit 1
+          fi
+
+      - name: Consolidar playlists remotas
+        run: |
+          python build_input_playlist.py playlists-urls.txt \
+            --output playlists-combinadas.m3u \
+            --timeout 45
+
+      - name: Contar streams encontrados
+        run: |
+          echo "Streams encontrados:"
+          grep -ci '^#EXTINF' playlists-combinadas.m3u || true
+
+      - name: Validar streams
+        run: |
+          python script.py playlists-combinadas.m3u \
+            --alive funcionales.m3u \
+            --dead descartados.m3u \
+            --report reporte.json \
+            --concurrency 4 \
+            --per-host 1 \
+            --timeout 45 \
+            --retry-timeout 60 \
+            --rw-timeout 20 \
+            --analyzeduration 20 \
+            --probesize 20000000 \
+            --retries 2 \
+            --retry-delay 8
+
+      - name: Publicar resultados
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validacion-streams-${{ github.run_number }}
+          path: |
+            playlists-combinadas.m3u
+            funcionales.m3u
+            descartados.m3u
+            reporte.json
+          if-no-files-found: warn
+          retention-days: 14
