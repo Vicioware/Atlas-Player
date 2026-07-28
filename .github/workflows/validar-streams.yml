@@ -14,7 +14,7 @@ on:
       - ".github/workflows/validar-streams.yml"
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   validar:
@@ -127,6 +127,30 @@ jobs:
             --probesize 20000000 \
             --retries 2 \
             --retry-delay 8
+            
+      - name: Publicar playlist maestra en el repositorio
+        if: success() && github.ref == 'refs/heads/main'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ ! -f funcionales.m3u ]; then
+            echo "::error::No se generó funcionales.m3u."
+            exit 1
+          fi
+
+          cp funcionales.m3u master.m3u
+
+          if git diff --quiet -- master.m3u && git ls-files --error-unmatch master.m3u >/dev/null 2>&1; then
+            echo "master.m3u no tiene cambios; no se crea un commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add master.m3u
+          git commit -m "chore: actualizar playlist maestra [skip ci]"
+          git push origin HEAD:main
 
       - name: Publicar resultados
         if: always()
