@@ -30,21 +30,77 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          cache: "pip"
-          cache-dependency-path: requirements.txt
 
-      - name: Instalar FFmpeg
+      - name: Instalar dependencias para compilar FFmpeg
         run: |
           sudo apt-get update
-          sudo apt-get install --yes --no-install-recommends ffmpeg
-          ffmpeg -version
+          sudo apt-get install --yes --no-install-recommends \
+            autoconf \
+            automake \
+            build-essential \
+            ca-certificates \
+            git \
+            libass-dev \
+            libfreetype6-dev \
+            libgnutls28-dev \
+            libmp3lame-dev \
+            libnuma-dev \
+            libopus-dev \
+            libtheora-dev \
+            libvorbis-dev \
+            libvpx-dev \
+            libx264-dev \
+            libx265-dev \
+            nasm \
+            pkg-config \
+            yasm \
+            zlib1g-dev
 
-      - name: Verificar soporte extension_picky
+      - name: Restaurar caché de FFmpeg
+        id: cache-ffmpeg
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/ffmpeg-extension-picky
+          key: ffmpeg-extension-picky-${{ runner.os }}-git-v1
+
+      - name: Compilar FFmpeg actual
+        if: steps.cache-ffmpeg.outputs.cache-hit != 'true'
         run: |
-          if ! ffmpeg -hide_banner -h demuxer=hls 2>&1 | grep -q "extension_picky"; then
-            echo "::error::El FFmpeg instalado no incluye la opción extension_picky."
-            exit 1
-          fi
+          git clone --depth 1 https://github.com/FFmpeg/FFmpeg.git ffmpeg-source
+          cd ffmpeg-source
+
+          ./configure \
+            --prefix="${RUNNER_TEMP}/ffmpeg-extension-picky" \
+            --disable-debug \
+            --disable-doc \
+            --disable-ffplay \
+            --disable-postproc \
+            --enable-gpl \
+            --enable-gnutls \
+            --enable-libass \
+            --enable-libfreetype \
+            --enable-libmp3lame \
+            --enable-libopus \
+            --enable-libtheora \
+            --enable-libvorbis \
+            --enable-libvpx \
+            --enable-libx264 \
+            --enable-libx265 \
+            --enable-shared
+
+          make -j"$(nproc)"
+          make install
+
+      - name: Usar FFmpeg compilado
+        run: |
+          echo "${RUNNER_TEMP}/ffmpeg-extension-picky/bin" >> "$GITHUB_PATH"
+          echo "LD_LIBRARY_PATH=${RUNNER_TEMP}/ffmpeg-extension-picky/lib:${LD_LIBRARY_PATH}" >> "$GITHUB_ENV"
+
+      - name: Confirmar extension_picky
+        run: |
+          ffmpeg -version
+          ffmpeg -hide_banner -h demuxer=hls 2>&1 | tee ffmpeg-hls-options.txt
+          grep -q "extension_picky" ffmpeg-hls-options.txt
 
       - name: Consolidar playlists remotas
         run: |
@@ -83,5 +139,6 @@ jobs:
             funcionales.m3u
             descartados.m3u
             reporte.json
+            ffmpeg-hls-options.txt
           if-no-files-found: warn
           retention-days: 14
