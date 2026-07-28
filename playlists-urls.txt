@@ -1,1 +1,4 @@
 http://190.108.83.69:8000/playlist.m3u
+http://181.233.180.4:8000//playlist.m3u?hls
+http://149.107.251.5:8000/playlist.m3u?hls
+http://181.119.215.61:8000/playlist.m3u?hls
