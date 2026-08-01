@@ -1,0 +1,83 @@
+name: Enriquecer master.m3u
+
+on:
+  workflow_dispatch:
+    inputs:
+      min_epg_score:
+        description: "Puntaje mínimo para aceptar una coincidencia con la EPG"
+        required: false
+        default: "88"
+        type: string
+      min_logo_score:
+        description: "Puntaje mínimo para aceptar una coincidencia de logo"
+        required: false
+        default: "91"
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: enrich-master-m3u-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r scripts/requirements-m3u.txt
+
+      - name: Enriquecer master.m3u
+        env:
+          MIN_EPG_SCORE: ${{ inputs.min_epg_score || '88' }}
+          MIN_LOGO_SCORE: ${{ inputs.min_logo_score || '91' }}
+        run: |
+          python scripts/enrich_master_m3u.py \
+            --input master.m3u \
+            --report enrichment-report.json \
+            --min-epg-score "$MIN_EPG_SCORE" \
+            --min-logo-score "$MIN_LOGO_SCORE"
+
+      - name: Validar el resultado
+        run: |
+          test -s master.m3u
+          head -n 1 master.m3u | grep -q '^#EXTM3U'
+
+      - name: Publicar informe de ejecución
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3u-enrichment-report
+          path: enrichment-report.json
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Commit de los cambios
+        run: |
+          if git diff --quiet -- master.m3u; then
+            echo "master.m3u no requiere cambios."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add master.m3u
+          git commit -m "chore: enriquecer metadatos de master.m3u"
+          git push
