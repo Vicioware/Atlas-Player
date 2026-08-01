@@ -16,11 +16,10 @@ import xml.etree.ElementTree as ET
 from collections import Counter, defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Iterable
 from urllib.parse import urlparse
 
 import requests
-from rapidfuzz import fuzz, process
+from rapidfuzz import fuzz
 
 EPG_URL = (
     "https://raw.githubusercontent.com/Puticastillo/EPGCL/"
@@ -46,35 +45,10 @@ LATIN_MARKERS = {
 }
 
 QUALITY_WORDS = {
-    "hd",
-    "fhd",
-    "uhd",
-    "sd",
-    "4k",
-    "8k",
-    "1080p",
-    "1080i",
-    "720p",
-    "60fps",
+    "hd", "fhd", "uhd", "sd", "4k", "8k", "1080p", "1080i",
+    "720p", "60fps",
 }
 
-# Tokens descriptivos que pueden aparecer en la playlist, pero no suelen formar
-# parte del identificador del canal en bases externas.
-OPTIONAL_WORDS = {
-    "tv",
-    "television",
-    "canal",
-    "channel",
-    "senal",
-}
-
-# Prefijos basura observados en playlists. Se eliminan únicamente si:
-# 1. son el primer token;
-# 2. son una sola letra;
-# 3. la coincidencia sin el prefijo es sustancialmente mejor.
-#
-# No se eliminan de manera incondicional, lo que protege nombres como:
-# DW Español, FX, L1 MAX, A&E, E!, etc.
 NOISE_PREFIXES = {
     "a", "b", "c", "g", "h", "i", "j", "k", "m", "n",
     "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
@@ -92,12 +66,11 @@ EXTINF_RE = re.compile(
 
 @dataclass
 class Entry:
-    extinf_index: int
     name: str
     duration: str
     attributes: dict[str, str]
     attribute_order: list[str]
-    original_extinf: str
+    block_lines: list[str]
     url: str | None = None
     tvg_id_source: str | None = None
     logo_source: str | None = None
@@ -124,7 +97,9 @@ class LogoCandidate:
 
 @dataclass
 class Stats:
+    entries_before_deduplication: int = 0
     entries: int = 0
+    duplicate_urls_removed: int = 0
     groups_replaced: int = 0
     tvg_ids_added: int = 0
     logos_added_from_duplicates: int = 0
@@ -135,21 +110,13 @@ class Stats:
     ambiguous_logos: list[dict] = field(default_factory=list)
 
 def strip_accents(text: str) -> str:
-    normalized = unicodedata.normalize("NFKD", text)
-    return "".join(
-        char for char in normalized
-        if not unicodedata.combining(char)
-    )
+    text = unicodedata.normalize("NFKD", text)
+    return "".join(char for char in text if not unicodedata.combining(char))
 
 def normalize_spaces(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
-def normalize_name(
-    text: str,
-    *,
-    remove_quality: bool = True,
-    remove_optional_words: bool = False,
-) -> str:
+def normalize_name(text: str, *, remove_quality: bool = True) -> str:
     text = strip_accents(text).casefold()
     text = text.replace("&", " and ")
     text = re.sub(r"(?<=\d)[._](?=\d)", "", text)
@@ -159,13 +126,14 @@ def normalize_name(
     if remove_quality:
         tokens = [token for token in tokens if token not in QUALITY_WORDS]
 
-    if remove_optional_words:
-        tokens = [token for token in tokens if token not in OPTIONAL_WORDS]
-
     return " ".join(tokens)
 
-def compact_name(text: str, **kwargs) -> str:
-    return normalize_name(text, **kwargs).replace(" ", "")
+def natural_sort_key(text: str) -> tuple:
+    normalized = normalize_name(text, remove_quality=False)
+    return tuple(
+        int(part) if part.isdigit() else part
+        for part in re.split(r"(\d+)", normalized)
+    )
 
 def remove_leading_noise_candidate(text: str) -> str | None:
     tokens = normalize_spaces(text).split()
@@ -174,18 +142,14 @@ def remove_leading_noise_candidate(text: str) -> str | None:
         return None
 
     first = strip_accents(tokens[0]).casefold()
-    if first not in NOISE_PREFIXES:
+
+    if first not in NOISE_PREFIXES or not re.fullmatch(r"[a-z]", first):
         return None
 
-    # Evita tratar como basura tokens con números o símbolos relevantes.
-    if not re.fullmatch(r"[a-z]", first):
-        return None
-
-    remainder = " ".join(tokens[1:]).strip()
-    return remainder or None
+    return " ".join(tokens[1:]).strip() or None
 
 def search_variants(name: str) -> list[tuple[str, bool]]:
-    variants: list[tuple[str, bool]] = [(name, False)]
+    variants = [(name, False)]
     without_prefix = remove_leading_noise_candidate(name)
 
     if without_prefix and without_prefix != name:
@@ -196,8 +160,9 @@ def search_variants(name: str) -> list[tuple[str, bool]]:
 def escape_attribute(value: str) -> str:
     return value.replace("\\", "\\\\").replace('"', '\\"')
 
-def parse_extinf(line: str, line_index: int) -> Entry | None:
+def parse_extinf(line: str) -> tuple[str, str, dict[str, str], list[str]] | None:
     match = EXTINF_RE.match(line.rstrip("\r\n"))
+
     if not match:
         return None
 
@@ -206,45 +171,83 @@ def parse_extinf(line: str, line_index: int) -> Entry | None:
 
     for attribute in ATTRIBUTE_RE.finditer(match.group("attrs")):
         key = attribute.group("key").lower()
-        value = attribute.group("value").replace('\\"', '"').replace("\\\\", "\\")
+        value = (
+            attribute.group("value")
+            .replace('\\"', '"')
+            .replace("\\\\", "\\")
+        )
 
         if key not in attributes:
             order.append(key)
 
         attributes[key] = value
 
-    return Entry(
-        extinf_index=line_index,
-        name=normalize_spaces(match.group("name")),
-        duration=match.group("duration"),
-        attributes=attributes,
-        attribute_order=order,
-        original_extinf=line.rstrip("\r\n"),
+    return (
+        normalize_spaces(match.group("name")),
+        match.group("duration"),
+        attributes,
+        order,
     )
 
-def parse_playlist(lines: list[str]) -> list[Entry]:
-    entries: list[Entry] = []
+def parse_playlist(lines: list[str]) -> tuple[list[str], list[Entry]]:
+    first_extinf = next(
+        (
+            index for index, line in enumerate(lines)
+            if line.lstrip().upper().startswith("#EXTINF:")
+        ),
+        len(lines),
+    )
 
-    for index, line in enumerate(lines):
-        entry = parse_extinf(line, index)
-        if entry is None:
+    header = lines[:first_extinf]
+    entries: list[Entry] = []
+    index = first_extinf
+
+    while index < len(lines):
+        line = lines[index]
+
+        if not line.lstrip().upper().startswith("#EXTINF:"):
+            index += 1
             continue
 
-        # Localiza la primera URL posterior al EXTINF sin alterar líneas
-        # auxiliares como #EXTVLCOPT.
-        for following in lines[index + 1:]:
+        end = index + 1
+
+        while (
+            end < len(lines)
+            and not lines[end].lstrip().upper().startswith("#EXTINF:")
+        ):
+            end += 1
+
+        parsed = parse_extinf(line)
+
+        if parsed is None:
+            index = end
+            continue
+
+        name, duration, attributes, order = parsed
+        block = lines[index:end]
+        stream_url = None
+
+        for following in block[1:]:
             stripped = following.strip()
 
-            if stripped.upper().startswith("#EXTINF:"):
-                break
-
             if stripped and not stripped.startswith("#"):
-                entry.url = stripped
+                stream_url = stripped
                 break
 
-        entries.append(entry)
+        entries.append(
+            Entry(
+                name=name,
+                duration=duration,
+                attributes=attributes,
+                attribute_order=order,
+                block_lines=block,
+                url=stream_url,
+            )
+        )
 
-    return entries
+        index = end
+
+    return header, entries
 
 def render_extinf(entry: Entry) -> str:
     preferred = ["tvg-id", "tvg-name", "tvg-logo", "group-title"]
@@ -269,15 +272,98 @@ def render_extinf(entry: Entry) -> str:
 
     return f'#EXTINF:{entry.duration}{attrs},{entry.name}'
 
-def download_text(url: str, timeout: int = 90) -> str:
-    headers = {
-        "User-Agent": (
-            "master-m3u-enricher/1.0 "
-            "(GitHub Actions; metadata enrichment)"
-        )
-    }
+def render_entry(entry: Entry) -> list[str]:
+    block = list(entry.block_lines)
 
-    response = requests.get(url, timeout=timeout, headers=headers)
+    if block:
+        block[0] = render_extinf(entry)
+        return block
+
+    result = [render_extinf(entry)]
+
+    if entry.url:
+        result.append(entry.url)
+
+    return result
+
+def canonical_url(url: str | None) -> str | None:
+    if not url:
+        return None
+
+    # Se eliminan únicamente espacios externos. No se modifica la consulta,
+    # porque dos URLs con parámetros diferentes pueden ser streams distintos.
+    return url.strip()
+
+def merge_duplicate_metadata(target: Entry, duplicate: Entry) -> None:
+    for key, value in duplicate.attributes.items():
+        if value.strip() and not target.attributes.get(key, "").strip():
+            target.attributes[key] = value
+
+            if key not in target.attribute_order:
+                target.attribute_order.append(key)
+
+    if (
+        len(duplicate.block_lines) > len(target.block_lines)
+        and canonical_url(duplicate.url) == canonical_url(target.url)
+    ):
+        # Conserva el EXTINF principal, pero aprovecha opciones auxiliares
+        # presentes en la copia más completa.
+        target_options = [
+            line for line in target.block_lines[1:]
+            if line.strip().startswith("#")
+        ]
+        duplicate_options = [
+            line for line in duplicate.block_lines[1:]
+            if line.strip().startswith("#")
+        ]
+
+        merged_options = list(target_options)
+
+        for line in duplicate_options:
+            if line not in merged_options:
+                merged_options.append(line)
+
+        target.block_lines = [
+            target.block_lines[0],
+            *merged_options,
+            target.url or duplicate.url or "",
+        ]
+
+        target.block_lines = [
+            line for line in target.block_lines if line != ""
+        ]
+
+def deduplicate_by_url(entries: list[Entry]) -> tuple[list[Entry], int]:
+    unique: list[Entry] = []
+    by_url: dict[str, Entry] = {}
+    removed = 0
+
+    for entry in entries:
+        key = canonical_url(entry.url)
+
+        # Una entrada sin URL no puede deduplicarse con seguridad.
+        if not key:
+            unique.append(entry)
+            continue
+
+        existing = by_url.get(key)
+
+        if existing is None:
+            by_url[key] = entry
+            unique.append(entry)
+            continue
+
+        merge_duplicate_metadata(existing, entry)
+        removed += 1
+
+    return unique, removed
+
+def download_text(url: str, timeout: int = 90) -> str:
+    response = requests.get(
+        url,
+        timeout=timeout,
+        headers={"User-Agent": "master-m3u-enricher/2.0"},
+    )
     response.raise_for_status()
     response.encoding = response.apparent_encoding or "utf-8"
     return response.text
@@ -286,8 +372,6 @@ def local_tag(tag: str) -> str:
     return tag.rsplit("}", 1)[-1]
 
 def load_epg_candidates(xml_text: str) -> list[EPGCandidate]:
-    # Relaciona títulos tanto desde <programme channel="..."> como desde
-    # <channel id="..."><display-name>...</display-name></channel>.
     title_to_channels: dict[tuple[str, str], Counter[str]] = defaultdict(Counter)
     root = ET.fromstring(xml_text)
 
@@ -296,6 +380,7 @@ def load_epg_candidates(xml_text: str) -> list[EPGCandidate]:
             continue
 
         channel_id = normalize_spaces(channel.attrib.get("id", ""))
+
         if not channel_id:
             continue
 
@@ -314,21 +399,21 @@ def load_epg_candidates(xml_text: str) -> list[EPGCandidate]:
             continue
 
         channel_id = normalize_spaces(programme.attrib.get("channel", ""))
+
         if not channel_id:
             continue
 
-        titles = [
-            normalize_spaces("".join(child.itertext()))
-            for child in programme
-            if local_tag(child.tag) == "title"
-        ]
+        for child in programme:
+            if local_tag(child.tag) != "title":
+                continue
 
-        for title in titles:
+            title = normalize_spaces("".join(child.itertext()))
             normalized = normalize_name(title)
+
             if title and normalized:
                 title_to_channels[(title, normalized)][channel_id] += 1
 
-    candidates: list[EPGCandidate] = []
+    candidates = []
 
     for (title, normalized), channel_counts in title_to_channels.items():
         channel_id = channel_counts.most_common(1)[0][0]
@@ -345,6 +430,7 @@ def load_epg_candidates(xml_text: str) -> list[EPGCandidate]:
 
 def split_logo_channel(channel: str) -> tuple[str, str]:
     channel = normalize_spaces(channel)
+
     if "." not in channel:
         return channel, ""
 
@@ -360,7 +446,7 @@ def parse_bool(value: str) -> bool:
 
 def load_logo_candidates(csv_text: str) -> list[LogoCandidate]:
     reader = csv.DictReader(io.StringIO(csv_text))
-    candidates: list[LogoCandidate] = []
+    candidates = []
 
     for row in reader:
         channel = normalize_spaces(row.get("channel", ""))
@@ -400,43 +486,37 @@ def token_score(left: str, right: str) -> float:
     compact_left = left.replace(" ", "")
     compact_right = right.replace(" ", "")
 
-    scores = [
+    score = max(
         fuzz.ratio(left, right),
         fuzz.WRatio(left, right),
         fuzz.token_sort_ratio(left, right),
         fuzz.ratio(compact_left, compact_right),
-    ]
+    )
 
-    # Coincidencia exacta luego de eliminar HD/FHD/UHD.
     if compact_left == compact_right:
-        scores.append(100.0)
+        score = 100.0
 
-    # Penaliza coincidencias que pierdan números. Así Canal 5 no se
-    # confundirá deliberadamente con Canal 6.
-    left_numbers = re.findall(r"\d+", left)
-    right_numbers = re.findall(r"\d+", right)
-
-    score = max(scores)
-
-    if left_numbers != right_numbers:
+    if re.findall(r"\d+", left) != re.findall(r"\d+", right):
         score -= 35.0
 
     return max(0.0, min(100.0, score))
 
-def epg_score(stream_name: str, candidate: EPGCandidate) -> float:
+def candidate_score(
+    stream_name: str,
+    candidate_name: str,
+) -> float:
     best = 0.0
 
     for variant, removed_noise in search_variants(stream_name):
         normalized = normalize_name(variant)
-        score = token_score(normalized, candidate.normalized)
+        score = token_score(normalized, candidate_name)
 
-        # El prefijo se descarta únicamente cuando produce una coincidencia
-        # muy fuerte; no se eliminan letras indiscriminadamente.
         if removed_noise:
             original = token_score(
                 normalize_name(stream_name),
-                candidate.normalized,
+                candidate_name,
             )
+
             if score < 94 or score < original + 7:
                 continue
 
@@ -450,7 +530,10 @@ def select_epg_match(
     min_score: float,
 ) -> tuple[EPGCandidate | None, float, float]:
     ranked = sorted(
-        ((candidate, epg_score(stream_name, candidate)) for candidate in candidates),
+        (
+            (candidate, candidate_score(stream_name, candidate.normalized))
+            for candidate in candidates
+        ),
         key=lambda item: item[1],
         reverse=True,
     )
@@ -458,17 +541,16 @@ def select_epg_match(
     if not ranked:
         return None, 0.0, 0.0
 
-    best_candidate, best_score = ranked[0]
-    second_score = ranked[1][1] if len(ranked) > 1 else 0.0
+    candidate, score = ranked[0]
+    second = ranked[1][1] if len(ranked) > 1 else 0.0
 
-    if best_score < min_score:
-        return None, best_score, second_score
+    if score < min_score:
+        return None, score, second
 
-    # Una coincidencia no exacta necesita separarse de la segunda opción.
-    if best_score < 100 and best_score - second_score < 3:
-        return None, best_score, second_score
+    if score < 100 and score - second < 3:
+        return None, score, second
 
-    return best_candidate, best_score, second_score
+    return candidate, score, second
 
 def latin_priority(candidate: LogoCandidate) -> int:
     searchable = normalize_name(
@@ -488,25 +570,6 @@ def latin_priority(candidate: LogoCandidate) -> int:
 
     return score
 
-def logo_score(stream_name: str, candidate: LogoCandidate) -> float:
-    best = 0.0
-
-    for variant, removed_noise in search_variants(stream_name):
-        normalized = normalize_name(variant)
-        score = token_score(normalized, candidate.normalized)
-
-        if removed_noise:
-            original = token_score(
-                normalize_name(stream_name),
-                candidate.normalized,
-            )
-            if score < 94 or score < original + 7:
-                continue
-
-        best = max(best, score)
-
-    return best
-
 def select_logo_match(
     stream_name: str,
     candidates: list[LogoCandidate],
@@ -516,7 +579,7 @@ def select_logo_match(
         (
             (
                 candidate,
-                logo_score(stream_name, candidate),
+                candidate_score(stream_name, candidate.normalized),
                 latin_priority(candidate),
             )
             for candidate in candidates
@@ -533,8 +596,6 @@ def select_logo_match(
     if best_raw_score < min_score:
         return None, best_raw_score, 0.0
 
-    # Primero conserva todos los nombres prácticamente equivalentes y luego
-    # prioriza LatinAmerica/Latinoamérica y ccTLD hispanohablantes.
     equivalent = [
         item for item in ranked
         if item[1] >= max(min_score, best_raw_score - 1.5)
@@ -545,62 +606,56 @@ def select_logo_match(
         reverse=True,
     )
 
-    best_candidate, best_score, _ = equivalent[0]
+    candidate, score, _ = equivalent[0]
 
     alternatives = [
         item for item in ranked
-        if item[0].channel != best_candidate.channel
+        if item[0].channel != candidate.channel
     ]
-    second_score = alternatives[0][1] if alternatives else 0.0
 
-    # Para coincidencias difusas, exige un margen suficiente. Las variantes
-    # regionales del mismo nombre no se consideran ambiguas porque se resuelven
-    # mediante latin_priority().
-    if best_score < 100:
+    second = alternatives[0][1] if alternatives else 0.0
+
+    if score < 100:
         near_other_bases = [
             item for item in alternatives
-            if item[1] >= best_score - 2
-            and item[0].normalized != best_candidate.normalized
+            if item[1] >= score - 2
+            and item[0].normalized != candidate.normalized
         ]
+
         if near_other_bases:
-            return None, best_score, near_other_bases[0][1]
+            return None, score, near_other_bases[0][1]
 
-    return best_candidate, best_score, second_score
+    return candidate, score, second
 
-def duplicate_key(name: str) -> str:
-    # Los duplicados se determinan por nombre visible, ignorando mayúsculas,
-    # acentos y diferencias de espacios. No se elimina HD aquí: "Canal" y
-    # "Canal HD" no deben agruparse automáticamente como duplicados.
+def duplicate_name_key(name: str) -> str:
     return normalize_name(name, remove_quality=False)
 
 def share_duplicate_logos(entries: list[Entry], stats: Stats) -> None:
     groups: dict[str, list[Entry]] = defaultdict(list)
 
     for entry in entries:
-        groups[duplicate_key(entry.name)].append(entry)
+        groups[duplicate_name_key(entry.name)].append(entry)
 
-    for group_entries in groups.values():
-        if len(group_entries) < 2:
+    for group in groups.values():
+        if len(group) < 2:
             continue
 
         logos = [
             entry.attributes.get("tvg-logo", "").strip()
-            for entry in group_entries
+            for entry in group
             if entry.attributes.get("tvg-logo", "").strip()
         ]
 
         if not logos:
             continue
 
-        # Si existen varios, usa el más frecuente y conserva cualquier logo
-        # existente distinto, porque solo se deben completar valores faltantes.
-        selected_logo = Counter(logos).most_common(1)[0][0]
+        selected = Counter(logos).most_common(1)[0][0]
 
-        for entry in group_entries:
+        for entry in group:
             if entry.attributes.get("tvg-logo", "").strip():
                 continue
 
-            entry.attributes["tvg-logo"] = selected_logo
+            entry.attributes["tvg-logo"] = selected
             entry.logo_source = "duplicate"
             stats.logos_added_from_duplicates += 1
 
@@ -610,15 +665,12 @@ def enrich_entries(
     logo_candidates: list[LogoCandidate],
     min_epg_score: float,
     min_logo_score: float,
-) -> Stats:
-    stats = Stats(entries=len(entries))
-
-    # group-title siempre se reemplaza. Solo los duplicados reciben el nombre
-    # como grupo; los canales únicos reciben "-" para evitar inventar categorías.
-    counts = Counter(duplicate_key(entry.name) for entry in entries)
+    stats: Stats,
+) -> None:
+    counts = Counter(duplicate_name_key(entry.name) for entry in entries)
 
     for entry in entries:
-        key = duplicate_key(entry.name)
+        key = duplicate_name_key(entry.name)
         new_group = entry.name if counts[key] > 1 else "-"
 
         if entry.attributes.get("group-title") != new_group:
@@ -626,14 +678,11 @@ def enrich_entries(
 
         entry.attributes["group-title"] = new_group
 
-    # Comparte primero logos existentes entre duplicados.
     share_duplicate_logos(entries, stats)
 
     for entry in entries:
-        existing_tvg_id = entry.attributes.get("tvg-id", "").strip()
-
-        if not existing_tvg_id:
-            candidate, score, second_score = select_epg_match(
+        if not entry.attributes.get("tvg-id", "").strip():
+            candidate, score, second = select_epg_match(
                 entry.name,
                 epg_candidates,
                 min_epg_score,
@@ -656,13 +705,11 @@ def enrich_entries(
                     stats.ambiguous_epg.append({
                         "stream": entry.name,
                         "best_score": round(score, 2),
-                        "second_score": round(second_score, 2),
+                        "second_score": round(second, 2),
                     })
 
-        existing_logo = entry.attributes.get("tvg-logo", "").strip()
-
-        if not existing_logo:
-            candidate, score, second_score = select_logo_match(
+        if not entry.attributes.get("tvg-logo", "").strip():
+            candidate, score, second = select_logo_match(
                 entry.name,
                 logo_candidates,
                 min_logo_score,
@@ -686,14 +733,10 @@ def enrich_entries(
                     stats.ambiguous_logos.append({
                         "stream": entry.name,
                         "best_score": round(score, 2),
-                        "second_score": round(second_score, 2),
+                        "second_score": round(second, 2),
                     })
 
-    # Una coincidencia externa encontrada para uno de los duplicados también se
-    # comparte con el resto, sin sobrescribir logos que ya existían.
     share_duplicate_logos(entries, stats)
-
-    return stats
 
 def atomic_write(path: Path, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -719,11 +762,16 @@ def write_report(
 ) -> None:
     report = {
         "summary": {
-            "entries": stats.entries,
+            "entries_before_deduplication":
+                stats.entries_before_deduplication,
+            "duplicate_urls_removed": stats.duplicate_urls_removed,
+            "entries_after_deduplication": stats.entries,
             "group_titles_replaced": stats.groups_replaced,
             "tvg_ids_added": stats.tvg_ids_added,
-            "logos_added_from_duplicates": stats.logos_added_from_duplicates,
-            "logos_added_from_database": stats.logos_added_from_database,
+            "logos_added_from_duplicates":
+                stats.logos_added_from_duplicates,
+            "logos_added_from_database":
+                stats.logos_added_from_database,
             "unmatched_epg_count": len(set(stats.unmatched_epg)),
             "unmatched_logo_count": len(set(stats.unmatched_logos)),
             "min_epg_score": min_epg_score,
@@ -748,7 +796,9 @@ def write_report(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Enriquece tvg-id, group-title y tvg-logo en una playlist M3U."
+        description=(
+            "Enriquece, deduplica y ordena una playlist M3U."
+        )
     )
     parser.add_argument("--input", default="master.m3u")
     parser.add_argument("--report", default="enrichment-report.json")
@@ -769,22 +819,26 @@ def main() -> int:
 
     original = input_path.read_text(encoding="utf-8-sig")
     newline = "\r\n" if "\r\n" in original else "\n"
-    had_final_newline = original.endswith(("\n", "\r"))
-
     lines = original.splitlines()
 
     if not lines or not lines[0].lstrip().upper().startswith("#EXTM3U"):
         print(
-            "ERROR: el archivo no parece ser una playlist M3U válida.",
+            "ERROR: el archivo no parece una playlist M3U válida.",
             file=sys.stderr,
         )
         return 1
 
-    entries = parse_playlist(lines)
+    header, entries = parse_playlist(lines)
 
     if not entries:
         print("ERROR: no se encontraron entradas #EXTINF.", file=sys.stderr)
         return 1
+
+    stats = Stats(entries_before_deduplication=len(entries))
+
+    entries, removed = deduplicate_by_url(entries)
+    stats.duplicate_urls_removed = removed
+    stats.entries = len(entries)
 
     print(f"Descargando EPG: {args.epg_url}")
     epg_text = download_text(args.epg_url)
@@ -796,35 +850,43 @@ def main() -> int:
     logo_candidates = load_logo_candidates(logos_text)
 
     if not epg_candidates:
-        print("ERROR: la EPG no produjo candidatos utilizables.", file=sys.stderr)
+        print("ERROR: la EPG no produjo candidatos.", file=sys.stderr)
         return 1
 
     if not logo_candidates:
-        print(
-            "ERROR: logos.csv no produjo candidatos utilizables.",
-            file=sys.stderr,
-        )
+        print("ERROR: logos.csv no produjo candidatos.", file=sys.stderr)
         return 1
 
-    print(f"Candidatos EPG: {len(epg_candidates)}")
-    print(f"Candidatos de logo: {len(logo_candidates)}")
-
-    stats = enrich_entries(
+    enrich_entries(
         entries,
         epg_candidates,
         logo_candidates,
         args.min_epg_score,
         args.min_logo_score,
+        stats,
     )
 
+    # Orden alfabético natural, sin distinguir mayúsculas ni acentos.
+    # Ejemplo: Canal 2 aparece antes de Canal 10.
+    entries.sort(
+        key=lambda entry: (
+            natural_sort_key(entry.name),
+            canonical_url(entry.url) or "",
+        )
+    )
+
+    output_lines = list(header)
+
+    # Evita líneas vacías acumuladas entre la cabecera y la primera entrada.
+    while output_lines and output_lines[-1] == "":
+        output_lines.pop()
+
     for entry in entries:
-        lines[entry.extinf_index] = render_extinf(entry)
+        output_lines.extend(render_entry(entry))
 
-    output = newline.join(lines)
-    if had_final_newline:
-        output += newline
-
+    output = newline.join(output_lines) + newline
     atomic_write(input_path, output)
+
     write_report(
         report_path,
         stats,
@@ -833,7 +895,12 @@ def main() -> int:
         args.min_logo_score,
     )
 
-    print(f"Entradas procesadas: {stats.entries}")
+    print(
+        "Entradas antes de deduplicar: "
+        f"{stats.entries_before_deduplication}"
+    )
+    print(f"URLs duplicadas eliminadas: {stats.duplicate_urls_removed}")
+    print(f"Entradas finales: {stats.entries}")
     print(f"group-title reemplazados: {stats.groups_replaced}")
     print(f"tvg-id agregados: {stats.tvg_ids_added}")
     print(
@@ -844,8 +911,6 @@ def main() -> int:
         "Logos agregados desde logos.csv: "
         f"{stats.logos_added_from_database}"
     )
-    print(f"Sin coincidencia EPG: {len(set(stats.unmatched_epg))}")
-    print(f"Sin coincidencia de logo: {len(set(stats.unmatched_logos))}")
     print(f"Informe: {report_path}")
 
     return 0
