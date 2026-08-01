@@ -49,6 +49,8 @@ http://190.108.83.69:8000/play/a022/index.m3u8
 http://190.108.83.69:8000/play/a07h/index.m3u8
 #EXTINF:-1 group-title="-",CHV HD
 http://190.108.83.69:8000/play/a03g/index.m3u8
+#EXTINF:-1 group-title="-",CNN Chile
+http://190.108.83.69:8000/play/a03p/index.m3u8
 #EXTINF:-1 group-title="-",CNN Espanol
 http://190.108.83.69:8000/play/a023/index.m3u8
 #EXTINF:-1 group-title="-",Canal 13 HD
@@ -127,6 +129,8 @@ http://190.108.83.69:8000/play/a07s/index.m3u8
 http://190.108.83.69:8000/play/a04i/index.m3u8
 #EXTINF:-1 group-title="-",Film&Arts
 http://190.108.83.69:8000/play/a00n/index.m3u8
+#EXTINF:-1 group-title="-",Food Network
+http://190.108.83.69:8000/play/a08e/index.m3u8
 #EXTINF:-1 group-title="-",France 24
 http://190.108.83.69:8000/play/a01j/index.m3u8
 #EXTINF:-1 group-title="-",G DS
@@ -261,6 +265,8 @@ http://190.108.83.69:8000/play/a01g/index.m3u8
 http://190.108.83.69:8000/play/a03y/index.m3u8
 #EXTINF:-1 group-title="-",HEI HD
 http://190.108.83.69:8000/play/a072/index.m3u8
+#EXTINF:-1 group-title="-",HGTV
+http://190.108.83.69:8000/play/a02f/index.m3u8
 #EXTINF:-1 group-title="-",HOLA TV HD
 http://190.108.83.69:8000/play/a073/index.m3u8
 #EXTINF:-1 group-title="-",HTV
@@ -273,6 +279,8 @@ http://190.108.83.69:8000/play/a045/index.m3u8
 http://190.108.83.69:8000/play/a08k/index.m3u8
 #EXTINF:-1 group-title="-",ID HD
 http://190.108.83.69:8000/play/a04d/index.m3u8
+#EXTINF:-1 group-title="-",Kanal D Drama
+http://190.108.83.69:8000/play/a084/index.m3u8
 #EXTINF:-1 group-title="-",L1
 http://190.108.83.69:8000/play/a08s/index.m3u8
 #EXTINF:-1 group-title="-",L1 MAX
@@ -383,6 +391,8 @@ http://190.108.83.69:8000/play/a02e/index.m3u8
 http://190.108.83.69:8000/play/a031/index.m3u8
 #EXTINF:-1 group-title="-",USA
 http://190.108.83.69:8000/play/a00v/index.m3u8
+#EXTINF:-1 group-title="-",Venus
+http://190.108.83.69:8000/play/a013/index.m3u8
 #EXTINF:-1 group-title="-",Via X Esports
 http://190.108.83.69:8000/play/a00u/index.m3u8
 #EXTINF:-1 group-title="-",Warner Channel HD
