@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_logo_size">64dp</dimen>
+    <dimen name="card_corner_radius">10dp</dimen>
+    <dimen name="card_padding">3dp</dimen>
+    <dimen name="card_logo_padding">22dp</dimen>
+    <dimen name="card_shadow_side_space">8dp</dimen>
+    <dimen name="card_shadow_top_space">6dp</dimen>
+    <dimen name="card_shadow_bottom_space">15dp</dimen>
+    <dimen name="card_shadow_offset">6dp</dimen>
+    <dimen name="card_shadow_space">11dp</dimen>
+    <dimen name="logo_shadow_offset">4dp</dimen>
+    <dimen name="grid_spacing">6dp</dimen>
+    <dimen name="screen_padding">18dp</dimen>
+    <dimen name="title_text_size">36sp</dimen>
+    <dimen name="app_title_spacing">36dp</dimen>
+    <dimen name="grid_top_after_title">108dp</dimen>
+    <dimen name="channel_name_size">13sp</dimen>
+    <dimen name="player_icon_size">72dp</dimen>
+    <dimen name="osd_text_size">44sp</dimen>
+    <dimen name="osd_padding_h">24dp</dimen>
+    <dimen name="osd_padding_v">12dp</dimen>
+    <dimen name="osd_corner_radius">8dp</dimen>
+    <dimen name="osd_margin">24dp</dimen>
+    <dimen name="drawer_width">320dp</dimen>
+    <dimen name="overlay_channel_name_size">22sp</dimen>
+    <dimen name="overlay_channel_name_margin">32dp</dimen>
+    <dimen name="drawer_item_padding_v">14dp</dimen>
+    <dimen name="drawer_item_padding_h">20dp</dimen>
+    <dimen name="drawer_item_text_size">16sp</dimen>
+    <dimen name="drawer_item_height">72dp</dimen>
+    <dimen name="drawer_number_text_size">24sp</dimen>
+    <dimen name="drawer_logo_size">48dp</dimen>
+    <dimen name="drawer_star_size">24dp</dimen>
+    <dimen name="grid_bottom_padding">72dp</dimen>
+    <dimen name="error_text_size">34sp</dimen>
+</resources>

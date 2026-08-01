@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Design System -->
+    <color name="bg_primary">#FF0F0F23</color>
+    <color name="surface">#FF1E1B4B</color>
+    <color name="accent">#FF4338CA</color>
+    <color name="cta_green">#FF22C55E</color>
+    <color name="text_primary">#FFF8FAFC</color>
+    <color name="text_muted">#FF94A3B8</color>
+    <color name="surface_light">#FF2D2A5E</color>
+    <color name="overlay_black">#CC000000</color>
+
+    <!-- Drawers más opacos -->
+    <color name="drawer_start">#F50F0F23</color>
+    <color name="drawer_end">#B30F0F23</color>
+
+    <color name="card_border">#33F8FAFC</color>
+    <color name="card_border_focused">#FF4338CA</color>
+    <color name="osd_bg">#B3000000</color>
+
+    <!-- Canal ACTUAL: acento más opaco -->
+    <color name="current_channel_bg">#994338CA</color>
+    <!-- Canal FOCALIZADO: blanco translúcido -->
+    <color name="focused_channel_bg">#33FFFFFF</color>
+</resources>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/drawer_item_height"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:clickable="true"
+    android:paddingHorizontal="@dimen/drawer_item_padding_h">
+
+    <TextView
+        android:id="@+id/tvChannelNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="44dp"
+        android:gravity="center"
+        android:textColor="@color/text_primary"
+        android:textSize="@dimen/drawer_number_text_size" />
+
+    <FrameLayout
+        android:layout_width="@dimen/drawer_logo_size"
+        android:layout_height="@dimen/drawer_logo_size"
+        android:layout_marginStart="12dp">
+
+        <ImageView
+            android:id="@+id/ivDrawerLogo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/channel_logo"
+            android:src="@drawable/ic_channel_placeholder" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvChannelName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="12dp"
+        android:gravity="center_vertical"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/text_primary"
+        android:textSize="@dimen/drawer_item_text_size" />
+
+    <ImageView
+        android:id="@+id/ivFavStar"
+        android:layout_width="@dimen/drawer_star_size"
+        android:layout_height="@dimen/drawer_star_size"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/ic_star"
+        android:contentDescription="@null"
+        android:visibility="gone" />
+
+</LinearLayout>
