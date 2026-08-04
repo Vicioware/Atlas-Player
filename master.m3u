@@ -331,6 +331,8 @@ http://190.108.83.69:8000/play/a067/index.m3u8
 http://190.108.83.69:8000/play/a07k/index.m3u8
 #EXTINF:-1 group-title="-",R Nex Tv
 http://190.108.83.69:8000/play/a06r/index.m3u8
+#EXTINF:-1 group-title="-",R PREMIUM GO
+http://190.108.83.69:8000/play/a082/index.m3u8
 #EXTINF:-1 group-title="-",R PUCALLPA TV
 http://190.108.83.69:8000/play/a05z/index.m3u8
 #EXTINF:-1 group-title="-",R SELVATICA
