@@ -135,8 +135,6 @@ http://190.108.83.69:8000/play/a00n/index.m3u8
 http://190.108.83.69:8000/play/a08e/index.m3u8
 #EXTINF:-1 group-title="-",France 24
 http://190.108.83.69:8000/play/a01j/index.m3u8
-#EXTINF:-1 group-title="-",G DS
-http://190.108.83.69:8000/play/a0cb/index.m3u8
 #EXTINF:-1 group-title="-",G LA KARIBEÑA
 http://190.108.83.69:8000/play/a0cd/index.m3u8
 #EXTINF:-1 group-title="-",GLOBAL
@@ -307,6 +305,8 @@ http://190.108.83.69:8000/play/a00r/index.m3u8
 http://190.108.83.69:8000/play/a046/index.m3u8
 #EXTINF:-1 group-title="-",Nick HD
 http://190.108.83.69:8000/play/a03l/index.m3u8
+#EXTINF:-1 group-title="-",Nick Music
+http://190.108.83.69:8000/play/a00l/index.m3u8
 #EXTINF:-1 group-title="-",Nuestra Tele
 http://190.108.83.69:8000/play/a00k/index.m3u8
 #EXTINF:-1 group-title="-",OROMAR TV
