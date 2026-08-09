@@ -135,6 +135,8 @@ http://190.108.83.69:8000/play/a00n/index.m3u8
 http://190.108.83.69:8000/play/a08e/index.m3u8
 #EXTINF:-1 group-title="-",France 24
 http://190.108.83.69:8000/play/a01j/index.m3u8
+#EXTINF:-1 group-title="-",G DS
+http://190.108.83.69:8000/play/a0cb/index.m3u8
 #EXTINF:-1 group-title="-",G LA KARIBEÑA
 http://190.108.83.69:8000/play/a0cd/index.m3u8
 #EXTINF:-1 group-title="-",GLOBAL
