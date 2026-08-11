@@ -3,24 +3,30 @@
 http://190.108.83.69:8000/play/a02o/index.m3u8
 #EXTINF:-1 group-title="-",A G WEST 
 http://190.108.83.69:8000/play/a0c9/index.m3u8
+#EXTINF:-1 group-title="-",A H ATV HD
+http://190.108.83.69:8000/play/a099/index.m3u8
 #EXTINF:-1 group-title="-",A H ESPN PERU
 http://190.108.83.69:8000/play/a05v/index.m3u8
 #EXTINF:-1 group-title="-",A H ESPN PREMIUN HD
 http://190.108.83.69:8000/play/a09k/index.m3u8
 #EXTINF:-1 group-title="-",A H ESPN1 HD
 http://190.108.83.69:8000/play/a09e/index.m3u8
-#EXTINF:-1 group-title="-",A H ESPN2 HD
-http://190.108.83.69:8000/play/a09f/index.m3u8
-#EXTINF:-1 group-title="-",A H ESPN3-HD
-http://190.108.83.69:8000/play/a09g/index.m3u8
 #EXTINF:-1 group-title="-",A H ESPN5 HD
 http://190.108.83.69:8000/play/a09i/index.m3u8
 #EXTINF:-1 group-title="-",A H ESPN6 HD
 http://190.108.83.69:8000/play/a096/index.m3u8
+#EXTINF:-1 group-title="-",A H ESPN7 HD
+http://190.108.83.69:8000/play/a09j/index.m3u8
+#EXTINF:-1 group-title="-",A H EUROCHANNEL 
+http://190.108.83.69:8000/play/a09n/index.m3u8
+#EXTINF:-1 group-title="-",A H EXITOSA
+http://190.108.83.69:8000/play/a0c0/index.m3u8
 #EXTINF:-1 group-title="-",A H L1MAX 
 http://190.108.83.69:8000/play/a0bl/index.m3u8
 #EXTINF:-1 group-title="-",A H TCM
 http://190.108.83.69:8000/play/a094/index.m3u8
+#EXTINF:-1 group-title="-",A H TVE HD
+http://190.108.83.69:8000/play/a0a8/index.m3u8
 #EXTINF:-1 group-title="-",A&E HD
 http://190.108.83.69:8000/play/a02y/index.m3u8
 #EXTINF:-1 group-title="-",AMC HD
