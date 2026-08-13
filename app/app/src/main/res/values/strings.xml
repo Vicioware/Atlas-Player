@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Atlas Player</string>
+    <string name="loading">Cargando…</string>
+    <string name="no_channels">No hay canales disponibles</string>
+    <string name="channel_logo">Logo del canal</string>
+    <string name="channel_unavailable">Canal no disponible</string>
+    <string name="favorites">Favoritos</string>
+    <string name="favorites_empty">Aún no tienes canales favoritos</string>
+    <string name="search_hint">Buscar canal…</string>
+    <string name="channel_options">Ver canal</string>
+    <string name="channel_options_empty">No hay fuentes alternativas para este canal</string>
+    <string name="channel_option_label">Opción %1$d</string>
+
+</resources>
