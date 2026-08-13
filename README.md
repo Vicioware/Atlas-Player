@@ -24,7 +24,8 @@ La interfaz separa la navegación de canales de la selección de fuentes:
 - Android TV.
 - Conexión a nternet.
 
-## [Descarga directa](https://github.com/Vicioware/Atlas-Player/releases/download/releases/AtlasPlayer_v1.0.apk)
+## Descarga directa
+[Versión 1.0](https://github.com/Vicioware/Atlas-Player/releases/download/releases/AtlasPlayer_v1.0.apk) desde releases
 
 ## Notas
 - Esta aplicación fué creada en su totalidad con inteligencia artificial, por lo que es probable que se encuentrem bugs o errores durante su uso.
