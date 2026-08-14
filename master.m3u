@@ -345,6 +345,8 @@ http://190.108.83.69:8000/play/a082/index.m3u8
 http://190.108.83.69:8000/play/a05z/index.m3u8
 #EXTINF:-1 group-title="-",R SELVATICA
 http://190.108.83.69:8000/play/a05y/index.m3u8
+#EXTINF:-1 group-title="-",R UCAYALINA TV
+http://190.108.83.69:8000/play/a060/index.m3u8
 #EXTINF:-1 group-title="-",RPP
 http://190.108.83.69:8000/play/a01a/index.m3u8
 #EXTINF:-1 group-title="-",SONY CHANNEL HD
