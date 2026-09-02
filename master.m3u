@@ -39,8 +39,6 @@ http://190.108.83.69:8000/play/a022/index.m3u8
 http://190.108.83.69:8000/play/a07h/index.m3u8
 #EXTINF:-1 group-title="-",CHV HD
 http://190.108.83.69:8000/play/a03g/index.m3u8
-#EXTINF:-1 group-title="-",CNN Chile
-http://190.108.83.69:8000/play/a03p/index.m3u8
 #EXTINF:-1 group-title="-",CNN Espanol
 http://190.108.83.69:8000/play/a023/index.m3u8
 #EXTINF:-1 group-title="-",Canal 13 HD
@@ -94,11 +92,13 @@ http://190.108.83.69:8000/play/a02w/index.m3u8
 #EXTINF:-1 group-title="-",ESPN 7HD
 http://190.108.83.69:8000/play/a049/index.m3u8
 #EXTINF:-1 group-title="-",ESPN HD
-http://190.108.83.69:8000/play/a08t/index.m3u8
-#EXTINF:-1 group-title="-",ESPN HD
 http://190.108.83.69:8000/play/a03s/index.m3u8
+#EXTINF:-1 group-title="-",ESPN HD
+http://190.108.83.69:8000/play/a08t/index.m3u8
 #EXTINF:-1 group-title="-",ESPN Premium HD
 http://190.108.83.69:8000/play/a03w/index.m3u8
+#EXTINF:-1 group-title="-",ETC
+http://190.108.83.69:8000/play/a08c/index.m3u8
 #EXTINF:-1 group-title="-",EWTN
 http://190.108.83.69:8000/play/a02h/index.m3u8
 #EXTINF:-1 group-title="-",El Gourmet HD
@@ -233,6 +233,10 @@ http://190.108.83.69:8000/play/a01g/index.m3u8
 http://190.108.83.69:8000/play/a03y/index.m3u8
 #EXTINF:-1 group-title="-",HEI HD
 http://190.108.83.69:8000/play/a072/index.m3u8
+#EXTINF:-1 group-title="-",HGTV
+http://190.108.83.69:8000/play/a02f/index.m3u8
+#EXTINF:-1 group-title="-",HOLA TV HD
+http://190.108.83.69:8000/play/a073/index.m3u8
 #EXTINF:-1 group-title="-",HTV
 http://190.108.83.69:8000/play/a00q/index.m3u8
 #EXTINF:-1 group-title="-",History 2
@@ -287,8 +291,6 @@ http://190.108.83.69:8000/play/a07n/index.m3u8
 http://190.108.83.69:8000/play/a086/index.m3u8
 #EXTINF:-1 group-title="-",R ALPHA
 http://190.108.83.69:8000/play/a09c/index.m3u8
-#EXTINF:-1 group-title="-",R CHARAPA TV
-http://190.108.83.69:8000/play/a067/index.m3u8
 #EXTINF:-1 group-title="-",R Estacion Tv
 http://190.108.83.69:8000/play/a07k/index.m3u8
 #EXTINF:-1 group-title="-",R Nex Tv
@@ -317,8 +319,6 @@ http://190.108.83.69:8000/play/a04e/index.m3u8
 http://190.108.83.69:8000/play/a074/index.m3u8
 #EXTINF:-1 group-title="-",Sun Channel HD
 http://190.108.83.69:8000/play/a03z/index.m3u8
-#EXTINF:-1 group-title="-",T NOVA TV
-http://190.108.83.69:8000/play/a07y/index.m3u8
 #EXTINF:-1 group-title="-",T PBO HD
 http://190.108.83.69:8000/play/a05r/index.m3u8
 #EXTINF:-1 group-title="-",TCM
@@ -327,6 +327,8 @@ http://190.108.83.69:8000/play/a00y/index.m3u8
 http://190.108.83.69:8000/play/a02a/index.m3u8
 #EXTINF:-1 group-title="-",TNT HD
 http://190.108.83.69:8000/play/a047/index.m3u8
+#EXTINF:-1 group-title="-",TNT Novelas HD
+http://190.108.83.69:8000/play/a038/index.m3u8
 #EXTINF:-1 group-title="-",TNT Series HD
 http://190.108.83.69:8000/play/a034/index.m3u8
 #EXTINF:-1 group-title="-",TNT Sports Premiun HD
@@ -335,6 +337,8 @@ http://190.108.83.69:8000/play/a03i/index.m3u8
 http://190.108.83.69:8000/play/a08m/index.m3u8
 #EXTINF:-1 group-title="-",TVN HD
 http://190.108.83.69:8000/play/a03f/index.m3u8
+#EXTINF:-1 group-title="-",Telemundo
+http://190.108.83.69:8000/play/a02d/index.m3u8
 #EXTINF:-1 group-title="-",Tlnovelas 
 http://190.108.83.69:8000/play/a06n/index.m3u8
 #EXTINF:-1 group-title="-",Tooncast
