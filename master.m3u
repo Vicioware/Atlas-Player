@@ -291,6 +291,8 @@ http://190.108.83.69:8000/play/a07n/index.m3u8
 http://190.108.83.69:8000/play/a086/index.m3u8
 #EXTINF:-1 group-title="-",R ALPHA
 http://190.108.83.69:8000/play/a09c/index.m3u8
+#EXTINF:-1 group-title="-",R CHARAPA TV
+http://190.108.83.69:8000/play/a067/index.m3u8
 #EXTINF:-1 group-title="-",R Estacion Tv
 http://190.108.83.69:8000/play/a07k/index.m3u8
 #EXTINF:-1 group-title="-",R Nex Tv
@@ -319,8 +321,6 @@ http://190.108.83.69:8000/play/a04e/index.m3u8
 http://190.108.83.69:8000/play/a074/index.m3u8
 #EXTINF:-1 group-title="-",Sun Channel HD
 http://190.108.83.69:8000/play/a03z/index.m3u8
-#EXTINF:-1 group-title="-",T NOVA TV
-http://190.108.83.69:8000/play/a07y/index.m3u8
 #EXTINF:-1 group-title="-",T PBO HD
 http://190.108.83.69:8000/play/a05r/index.m3u8
 #EXTINF:-1 group-title="-",TCM
