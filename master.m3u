@@ -3,10 +3,52 @@
 http://190.108.83.69:8000/play/a02o/index.m3u8
 #EXTINF:-1 group-title="-",A G WEST 
 http://190.108.83.69:8000/play/a0c9/index.m3u8
+#EXTINF:-1 group-title="-",A H ATV HD
+http://190.108.83.69:8000/play/a099/index.m3u8
+#EXTINF:-1 group-title="-",A H BETHEL HD
+http://190.108.83.69:8000/play/a0at/index.m3u8
+#EXTINF:-1 group-title="-",A H ESPN PERU
+http://190.108.83.69:8000/play/a05v/index.m3u8
+#EXTINF:-1 group-title="-",A H ESPN PREMIUN HD
+http://190.108.83.69:8000/play/a09k/index.m3u8
+#EXTINF:-1 group-title="-",A H ESPN1 HD
+http://190.108.83.69:8000/play/a09e/index.m3u8
+#EXTINF:-1 group-title="-",A H ESPN2 HD
+http://190.108.83.69:8000/play/a09f/index.m3u8
+#EXTINF:-1 group-title="-",A H ESPN3-HD
+http://190.108.83.69:8000/play/a09g/index.m3u8
+#EXTINF:-1 group-title="-",A H ESPN4 HD
+http://190.108.83.69:8000/play/a09h/index.m3u8
+#EXTINF:-1 group-title="-",A H ESPN5 HD
+http://190.108.83.69:8000/play/a09i/index.m3u8
+#EXTINF:-1 group-title="-",A H ESPN6 HD
+http://190.108.83.69:8000/play/a096/index.m3u8
+#EXTINF:-1 group-title="-",A H ESPN7 HD
+http://190.108.83.69:8000/play/a09j/index.m3u8
 #EXTINF:-1 group-title="-",A H EUROCHANNEL 
 http://190.108.83.69:8000/play/a09n/index.m3u8
+#EXTINF:-1 group-title="-",A H EXITOSA
+http://190.108.83.69:8000/play/a0c0/index.m3u8
 #EXTINF:-1 group-title="-",A H L1MAX 
 http://190.108.83.69:8000/play/a0bl/index.m3u8
+#EXTINF:-1 group-title="-",A H NTN 24 HORAS HD
+http://190.108.83.69:8000/play/a0ba/index.m3u8
+#EXTINF:-1 group-title="-",A H NUESTRA TELE HD
+http://190.108.83.69:8000/play/a0bb/index.m3u8
+#EXTINF:-1 group-title="-",A H OROMAR TV HD
+http://190.108.83.69:8000/play/a0bc/index.m3u8
+#EXTINF:-1 group-title="-",A H RPP NOTICIAS 
+http://190.108.83.69:8000/play/a0bf/index.m3u8
+#EXTINF:-1 group-title="-",A H SUN CHANNEL HD
+http://190.108.83.69:8000/play/a0bh/index.m3u8
+#EXTINF:-1 group-title="-",A H TCM
+http://190.108.83.69:8000/play/a094/index.m3u8
+#EXTINF:-1 group-title="-",A H TELE NOVELAS
+http://190.108.83.69:8000/play/a0ap/index.m3u8
+#EXTINF:-1 group-title="-",A H TVE HD
+http://190.108.83.69:8000/play/a0a8/index.m3u8
+#EXTINF:-1 group-title="-",A H WILLAX HD
+http://190.108.83.69:8000/play/a0c1/index.m3u8
 #EXTINF:-1 group-title="-",A&E HD
 http://190.108.83.69:8000/play/a02y/index.m3u8
 #EXTINF:-1 group-title="-",AMC HD
@@ -127,40 +169,108 @@ http://190.108.83.69:8000/play/a01b/index.m3u8
 http://190.108.83.69:8000/play/a00w/index.m3u8
 #EXTINF:-1 group-title="-",Golden HD
 http://190.108.83.69:8000/play/a00i/index.m3u8
+#EXTINF:-1 group-title="-",H A TRES SERIES HD
+http://190.108.83.69:8000/play/a0as/index.m3u8
+#EXTINF:-1 group-title="-",H A&E MUNDO HD
+http://190.108.83.69:8000/play/a0aq/index.m3u8
+#EXTINF:-1 group-title="-",H AMC HD
+http://190.108.83.69:8000/play/a09s/index.m3u8
+#EXTINF:-1 group-title="-",H AMC SERIES 
+http://190.108.83.69:8000/play/a091/index.m3u8
 #EXTINF:-1 group-title="-",H AMERICA TV
 http://190.108.83.69:8000/play/a097/index.m3u8
+#EXTINF:-1 group-title="-",H ANIMAL PLANET
+http://190.108.83.69:8000/play/a09v/index.m3u8
 #EXTINF:-1 group-title="-",H ATV SUR HD
 http://190.108.83.69:8000/play/a0cq/index.m3u8
 #EXTINF:-1 group-title="-",H ATV+ HD
 http://190.108.83.69:8000/play/a0cp/index.m3u8
+#EXTINF:-1 group-title="-",H AXN HD
+http://190.108.83.69:8000/play/a0ar/index.m3u8
+#EXTINF:-1 group-title="-",H CGTN SPANISH
+http://190.108.83.69:8000/play/a0ao/index.m3u8
+#EXTINF:-1 group-title="-",H CINECANAL HD
+http://190.108.83.69:8000/play/a09w/index.m3u8
+#EXTINF:-1 group-title="-",H CINEMAX HD
+http://190.108.83.69:8000/play/a0av/index.m3u8
+#EXTINF:-1 group-title="-",H CNN SPANISH HD
+http://190.108.83.69:8000/play/a0au/index.m3u8
+#EXTINF:-1 group-title="-",H D PELICULA 
+http://190.108.83.69:8000/play/a0ay/index.m3u8
+#EXTINF:-1 group-title="-",H DHE HD
+http://190.108.83.69:8000/play/a0aw/index.m3u8
+#EXTINF:-1 group-title="-",H DISCOVERY CHANNEL HD
+http://190.108.83.69:8000/play/a09x/index.m3u8
 #EXTINF:-1 group-title="-",H DISCOVERY INVESTIGATION
 http://190.108.83.69:8000/play/a0a0/index.m3u8
 #EXTINF:-1 group-title="-",H DISCOVERY KIDS
 http://190.108.83.69:8000/play/a09r/index.m3u8
+#EXTINF:-1 group-title="-",H DISCOVERY SCIENCES
+http://190.108.83.69:8000/play/a0az/index.m3u8
+#EXTINF:-1 group-title="-",H DISCOVERY TURBO HD
+http://190.108.83.69:8000/play/a0a6/index.m3u8
+#EXTINF:-1 group-title="-",H DISNEY JUNIOR HD
+http://190.108.83.69:8000/play/a0a5/index.m3u8
+#EXTINF:-1 group-title="-",H DW SPANISH
+http://190.108.83.69:8000/play/a0ak/index.m3u8
+#EXTINF:-1 group-title="-",H Disney Channel HD
+http://190.108.83.69:8000/play/a09y/index.m3u8
 #EXTINF:-1 group-title="-",H EWTN HD
 http://190.108.83.69:8000/play/a0b0/index.m3u8
+#EXTINF:-1 group-title="-",H FOOD NETWORK HD
+http://190.108.83.69:8000/play/a0a3/index.m3u8
 #EXTINF:-1 group-title="-",H FRANCE 24 HD
 http://190.108.83.69:8000/play/a0b2/index.m3u8
+#EXTINF:-1 group-title="-",H FX HD
+http://190.108.83.69:8000/play/a09z/index.m3u8
 #EXTINF:-1 group-title="-",H Film&Arts 
 http://190.108.83.69:8000/play/a093/index.m3u8
+#EXTINF:-1 group-title="-",H GLOBAL HD
+http://190.108.83.69:8000/play/a09b/index.m3u8
 #EXTINF:-1 group-title="-",H GOLDEN HD
 http://190.108.83.69:8000/play/a0b3/index.m3u8
 #EXTINF:-1 group-title="-",H GOURMET HD
 http://190.108.83.69:8000/play/a09t/index.m3u8
+#EXTINF:-1 group-title="-",H HGTV
+http://190.108.83.69:8000/play/a0b4/index.m3u8
+#EXTINF:-1 group-title="-",H HISTORY 2 HD
+http://190.108.83.69:8000/play/a0b5/index.m3u8
 #EXTINF:-1 group-title="-",H HISTORY HD
 http://190.108.83.69:8000/play/a0b6/index.m3u8
+#EXTINF:-1 group-title="-",H HTV HD
+http://190.108.83.69:8000/play/a0aj/index.m3u8
+#EXTINF:-1 group-title="-",H Home & Health HD
+http://190.108.83.69:8000/play/a09u/index.m3u8
 #EXTINF:-1 group-title="-",H KANAL DRAMA HD
 http://190.108.83.69:8000/play/a0b7/index.m3u8
+#EXTINF:-1 group-title="-",H LAS ESTRELLAS HD
+http://190.108.83.69:8000/play/a0b8/index.m3u8
 #EXTINF:-1 group-title="-",H LATELE HD
 http://190.108.83.69:8000/play/a0cr/index.m3u8
 #EXTINF:-1 group-title="-",H LATINA HD
 http://190.108.83.69:8000/play/a09a/index.m3u8
+#EXTINF:-1 group-title="-",H LIFETIME HD
+http://190.108.83.69:8000/play/a0b9/index.m3u8
+#EXTINF:-1 group-title="-",H NATGEO HD
+http://190.108.83.69:8000/play/a0a1/index.m3u8
+#EXTINF:-1 group-title="-",H PANAMERICANA TV
+http://190.108.83.69:8000/play/a098/index.m3u8
+#EXTINF:-1 group-title="-",H PASIONES HD
+http://190.108.83.69:8000/play/a0bd/index.m3u8
+#EXTINF:-1 group-title="-",H PLIM PLIM HD
+http://190.108.83.69:8000/play/a0be/index.m3u8
 #EXTINF:-1 group-title="-",H SONY MOVIES HD
 http://190.108.83.69:8000/play/a0ag/index.m3u8
 #EXTINF:-1 group-title="-",H SPACE HD
 http://190.108.83.69:8000/play/a0a7/index.m3u8
 #EXTINF:-1 group-title="-",H STAR CHANNEL HD
 http://190.108.83.69:8000/play/a0a2/index.m3u8
+#EXTINF:-1 group-title="-",H STUDIO UNIVERSAL HD
+http://190.108.83.69:8000/play/a0bg/index.m3u8
+#EXTINF:-1 group-title="-",H TLC HD
+http://190.108.83.69:8000/play/a0a4/index.m3u8
+#EXTINF:-1 group-title="-",H TNT SERIES HD
+http://190.108.83.69:8000/play/a0bi/index.m3u8
 #EXTINF:-1 group-title="-",H TV PERU 
 http://190.108.83.69:8000/play/a092/index.m3u8
 #EXTINF:-1 group-title="-",H UNIVERSAL CHANNEL HD
@@ -237,6 +347,8 @@ http://190.108.83.69:8000/play/a02p/index.m3u8
 http://190.108.83.69:8000/play/a07n/index.m3u8
 #EXTINF:-1 group-title="-",Plus TV Life
 http://190.108.83.69:8000/play/a086/index.m3u8
+#EXTINF:-1 group-title="-",R ALPHA
+http://190.108.83.69:8000/play/a09c/index.m3u8
 #EXTINF:-1 group-title="-",R CHARAPA TV
 http://190.108.83.69:8000/play/a067/index.m3u8
 #EXTINF:-1 group-title="-",R Estacion Tv
