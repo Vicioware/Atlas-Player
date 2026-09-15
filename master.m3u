@@ -7,6 +7,8 @@ http://190.108.83.69:8000/play/a0c9/index.m3u8
 http://190.108.83.69:8000/play/a099/index.m3u8
 #EXTINF:-1 group-title="-",A H BETHEL HD
 http://190.108.83.69:8000/play/a0at/index.m3u8
+#EXTINF:-1 group-title="-",A H ESPN PERU
+http://190.108.83.69:8000/play/a05v/index.m3u8
 #EXTINF:-1 group-title="-",A H ESPN PREMIUN HD
 http://190.108.83.69:8000/play/a09k/index.m3u8
 #EXTINF:-1 group-title="-",A H ESPN1 HD
@@ -132,9 +134,9 @@ http://190.108.83.69:8000/play/a02w/index.m3u8
 #EXTINF:-1 group-title="-",ESPN 7HD
 http://190.108.83.69:8000/play/a049/index.m3u8
 #EXTINF:-1 group-title="-",ESPN HD
-http://190.108.83.69:8000/play/a03s/index.m3u8
-#EXTINF:-1 group-title="-",ESPN HD
 http://190.108.83.69:8000/play/a08t/index.m3u8
+#EXTINF:-1 group-title="-",ESPN HD
+http://190.108.83.69:8000/play/a03s/index.m3u8
 #EXTINF:-1 group-title="-",ESPN Premium HD
 http://190.108.83.69:8000/play/a03w/index.m3u8
 #EXTINF:-1 group-title="-",ETC
@@ -157,6 +159,8 @@ http://190.108.83.69:8000/play/a00n/index.m3u8
 http://190.108.83.69:8000/play/a08e/index.m3u8
 #EXTINF:-1 group-title="-",France 24
 http://190.108.83.69:8000/play/a01j/index.m3u8
+#EXTINF:-1 group-title="-",G DS
+http://190.108.83.69:8000/play/a0cb/index.m3u8
 #EXTINF:-1 group-title="-",G LA KARIBEÑA
 http://190.108.83.69:8000/play/a0cd/index.m3u8
 #EXTINF:-1 group-title="-",GLOBAL
@@ -345,10 +349,10 @@ http://190.108.83.69:8000/play/a07n/index.m3u8
 http://190.108.83.69:8000/play/a086/index.m3u8
 #EXTINF:-1 group-title="-",R ALPHA
 http://190.108.83.69:8000/play/a09c/index.m3u8
+#EXTINF:-1 group-title="-",R CHARAPA TV
+http://190.108.83.69:8000/play/a067/index.m3u8
 #EXTINF:-1 group-title="-",R Estacion Tv
 http://190.108.83.69:8000/play/a07k/index.m3u8
-#EXTINF:-1 group-title="-",R Nex Tv
-http://190.108.83.69:8000/play/a06r/index.m3u8
 #EXTINF:-1 group-title="-",R ORIENTAL
 http://190.108.83.69:8000/play/a05y/index.m3u8
 #EXTINF:-1 group-title="-",R PREMIUM GO
