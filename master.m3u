@@ -3,8 +3,6 @@
 http://190.108.83.69:8000/play/a02o/index.m3u8
 #EXTINF:-1 group-title="-",A G WEST 
 http://190.108.83.69:8000/play/a0c9/index.m3u8
-#EXTINF:-1 group-title="-",A H EUROCHANNEL 
-http://190.108.83.69:8000/play/a09n/index.m3u8
 #EXTINF:-1 group-title="-",A H L1MAX 
 http://190.108.83.69:8000/play/a0bl/index.m3u8
 #EXTINF:-1 group-title="-",A&E HD
