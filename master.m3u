@@ -97,6 +97,8 @@ http://190.108.83.69:8000/play/a03w/index.m3u8
 http://190.108.83.69:8000/play/a08c/index.m3u8
 #EXTINF:-1 group-title="-",EWTN
 http://190.108.83.69:8000/play/a02h/index.m3u8
+#EXTINF:-1 group-title="-",El Gourmet HD
+http://190.108.83.69:8000/play/a030/index.m3u8
 #EXTINF:-1 group-title="-",El Trece
 http://190.108.83.69:8000/play/a01d/index.m3u8
 #EXTINF:-1 group-title="-",Enlace
@@ -223,6 +225,8 @@ http://190.108.83.69:8000/play/a05y/index.m3u8
 http://190.108.83.69:8000/play/a082/index.m3u8
 #EXTINF:-1 group-title="-",R PUCALLPA TV
 http://190.108.83.69:8000/play/a05z/index.m3u8
+#EXTINF:-1 group-title="-",R UCAYALINA TV
+http://190.108.83.69:8000/play/a060/index.m3u8
 #EXTINF:-1 group-title="-",RPP
 http://190.108.83.69:8000/play/a01a/index.m3u8
 #EXTINF:-1 group-title="-",SONY CHANNEL HD
@@ -415,6 +419,8 @@ http://181.119.215.61:8000/play/a0i8/index.m3u8?hls
 http://181.119.215.61:8000/play/a0g1/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a0jl.png",Nat Geo Kids
 http://181.119.215.61:8000/play/a0jl/index.m3u8?hls
+#EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a0g3.png",SEMILLITAS
+http://181.119.215.61:8000/play/a0g3/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a03k.png",Tooncast
 http://181.119.215.61:8000/play/a03k/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a0jk.png",Canal 11 - GUA
