@@ -115,6 +115,8 @@ http://190.108.83.69:8000/play/a08e/index.m3u8
 http://190.108.83.69:8000/play/a01j/index.m3u8
 #EXTINF:-1 group-title="-",G DS
 http://190.108.83.69:8000/play/a0cb/index.m3u8
+#EXTINF:-1 group-title="-",G LA KARIBEÑA
+http://190.108.83.69:8000/play/a0cd/index.m3u8
 #EXTINF:-1 group-title="-",GLOBAL
 http://190.108.83.69:8000/play/a01b/index.m3u8
 #EXTINF:-1 group-title="-",Golden Edge
@@ -307,10 +309,10 @@ http://181.119.215.61:8000/play/a04y/index.m3u8?hls
 http://181.119.215.61:8000/play/a085/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a05j.png",Canal 4 - NIC
 http://181.119.215.61:8000/play/a05j/index.m3u8?hls
-#EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a05z.png",Canal 7 HD CR
-http://181.119.215.61:8000/play/a05z/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a04p.png",Canal 7 HD CR
 http://181.119.215.61:8000/play/a04p/index.m3u8?hls
+#EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a05z.png",Canal 7 HD CR
+http://181.119.215.61:8000/play/a05z/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a07k.png",Canal Claro
 http://181.119.215.61:8000/play/a07k/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a05h.png",Canal del Congreso
@@ -353,8 +355,6 @@ http://181.119.215.61:8000/play/a08a/index.m3u8?hls
 http://181.119.215.61:8000/play/a088/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a08b.png",FOX GUA HD
 http://181.119.215.61:8000/play/a08b/index.m3u8?hls
-#EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a08c.png",FOX GUATEMALA
-http://181.119.215.61:8000/play/a08c/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a089.png",FOX HD GUA
 http://181.119.215.61:8000/play/a089/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a05f.png",FUTV CR
@@ -379,10 +379,10 @@ http://181.119.215.61:8000/play/a04t/index.m3u8?hls
 http://181.119.215.61:8000/play/a07u/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a05d.png",TN 23
 http://181.119.215.61:8000/play/a05d/index.m3u8?hls
-#EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a056.png",TNT Novelas
-http://181.119.215.61:8000/play/a056/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a05w.png",TNT Novelas
 http://181.119.215.61:8000/play/a05w/index.m3u8?hls
+#EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a056.png",TNT Novelas
+http://181.119.215.61:8000/play/a056/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a05g.png",TV Oriente ESA
 http://181.119.215.61:8000/play/a05g/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a05n.png",TVM25 -  ESA
@@ -401,6 +401,8 @@ http://181.119.215.61:8000/play/a087/index.m3u8?hls
 http://181.119.215.61:8000/play/a07s/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a07t.png",las estrellas
 http://181.119.215.61:8000/play/a07t/index.m3u8?hls
+#EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a07w.png",mas tv toto
+http://181.119.215.61:8000/play/a07w/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a07q.png",sky la liga
 http://181.119.215.61:8000/play/a07q/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a07v.png",tudn
