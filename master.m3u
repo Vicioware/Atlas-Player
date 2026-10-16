@@ -213,14 +213,16 @@ http://190.108.83.69:8000/play/a07n/index.m3u8
 http://190.108.83.69:8000/play/a086/index.m3u8
 #EXTINF:-1 group-title="-",R ALPHA
 http://190.108.83.69:8000/play/a09c/index.m3u8
-#EXTINF:-1 group-title="-",R CHARAPA TV
-http://190.108.83.69:8000/play/a067/index.m3u8
 #EXTINF:-1 group-title="-",R Estacion Tv
 http://190.108.83.69:8000/play/a07k/index.m3u8
 #EXTINF:-1 group-title="-",R Nex Tv
 http://190.108.83.69:8000/play/a06r/index.m3u8
 #EXTINF:-1 group-title="-",R ORIENTAL
 http://190.108.83.69:8000/play/a05y/index.m3u8
+#EXTINF:-1 group-title="-",R PREMIUM GO
+http://190.108.83.69:8000/play/a082/index.m3u8
+#EXTINF:-1 group-title="-",R PUCALLPA TV
+http://190.108.83.69:8000/play/a05z/index.m3u8
 #EXTINF:-1 group-title="-",R UCAYALINA TV
 http://190.108.83.69:8000/play/a060/index.m3u8
 #EXTINF:-1 group-title="-",RPP
@@ -349,8 +351,8 @@ http://181.119.215.61:8000/play/a05b/index.m3u8?hls
 http://181.119.215.61:8000/play/a08a/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a088.png",FOX CR
 http://181.119.215.61:8000/play/a088/index.m3u8?hls
-#EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a08d.png",FOX GUA HD
-http://181.119.215.61:8000/play/a08d/index.m3u8?hls
+#EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a08e.png",FOX GUA
+http://181.119.215.61:8000/play/a08e/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a05f.png",FUTV CR
 http://181.119.215.61:8000/play/a05f/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a05a.png",France24
@@ -373,10 +375,10 @@ http://181.119.215.61:8000/play/a04t/index.m3u8?hls
 http://181.119.215.61:8000/play/a07u/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a05d.png",TN 23
 http://181.119.215.61:8000/play/a05d/index.m3u8?hls
-#EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a056.png",TNT Novelas
-http://181.119.215.61:8000/play/a056/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a05w.png",TNT Novelas
 http://181.119.215.61:8000/play/a05w/index.m3u8?hls
+#EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a056.png",TNT Novelas
+http://181.119.215.61:8000/play/a056/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a05g.png",TV Oriente ESA
 http://181.119.215.61:8000/play/a05g/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a05n.png",TVM25 -  ESA
