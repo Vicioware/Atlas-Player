@@ -101,8 +101,6 @@ http://190.108.83.69:8000/play/a02h/index.m3u8
 http://190.108.83.69:8000/play/a01d/index.m3u8
 #EXTINF:-1 group-title="-",Enlace
 http://190.108.83.69:8000/play/a02j/index.m3u8
-#EXTINF:-1 group-title="-",Europa Europa
-http://190.108.83.69:8000/play/a00z/index.m3u8
 #EXTINF:-1 group-title="-",Exitosa TV
 http://190.108.83.69:8000/play/a07s/index.m3u8
 #EXTINF:-1 group-title="-",FX HD
@@ -137,8 +135,6 @@ http://190.108.83.69:8000/play/a09a/index.m3u8
 http://190.108.83.69:8000/play/a092/index.m3u8
 #EXTINF:-1 group-title="-",H- GOURMET HD
 http://190.108.83.69:8000/play/a0d2/index.m3u8
-#EXTINF:-1 group-title="-",HBO 2
-http://190.108.83.69:8000/play/a0cx/index.m3u8
 #EXTINF:-1 group-title="-",HBO Family HD
 http://190.108.83.69:8000/play/a03x/index.m3u8
 #EXTINF:-1 group-title="-",HBO HD
@@ -211,8 +207,6 @@ http://190.108.83.69:8000/play/a07n/index.m3u8
 http://190.108.83.69:8000/play/a086/index.m3u8
 #EXTINF:-1 group-title="-",R ALPHA
 http://190.108.83.69:8000/play/a09c/index.m3u8
-#EXTINF:-1 group-title="-",R CHARAPA TV
-http://190.108.83.69:8000/play/a067/index.m3u8
 #EXTINF:-1 group-title="-",R Estacion Tv
 http://190.108.83.69:8000/play/a07k/index.m3u8
 #EXTINF:-1 group-title="-",R Nex Tv
@@ -275,12 +269,6 @@ http://190.108.83.69:8000/play/a02e/index.m3u8
 http://190.108.83.69:8000/play/a031/index.m3u8
 #EXTINF:-1 group-title="-",USA
 http://190.108.83.69:8000/play/a00v/index.m3u8
-#EXTINF:-1 group-title="-",Universal Cinema SD
-http://190.108.83.69:8000/play/a0cz/index.m3u8
-#EXTINF:-1 group-title="-",Universal Comedy SD
-http://190.108.83.69:8000/play/a0d0/index.m3u8
-#EXTINF:-1 group-title="-",Universal Premiere SD
-http://190.108.83.69:8000/play/a0cy/index.m3u8
 #EXTINF:-1 group-title="-",Venus
 http://190.108.83.69:8000/play/a013/index.m3u8
 #EXTINF:-1 group-title="-",Via X Esports
