@@ -101,8 +101,6 @@ http://190.108.83.69:8000/play/a02h/index.m3u8
 http://190.108.83.69:8000/play/a01d/index.m3u8
 #EXTINF:-1 group-title="-",Enlace
 http://190.108.83.69:8000/play/a02j/index.m3u8
-#EXTINF:-1 group-title="-",Europa Europa
-http://190.108.83.69:8000/play/a00z/index.m3u8
 #EXTINF:-1 group-title="-",Exitosa TV
 http://190.108.83.69:8000/play/a07s/index.m3u8
 #EXTINF:-1 group-title="-",FX HD
@@ -209,10 +207,10 @@ http://190.108.83.69:8000/play/a02p/index.m3u8
 http://190.108.83.69:8000/play/a07n/index.m3u8
 #EXTINF:-1 group-title="-",Plus TV Life
 http://190.108.83.69:8000/play/a086/index.m3u8
-#EXTINF:-1 group-title="-",R ALPHA
-http://190.108.83.69:8000/play/a09c/index.m3u8
 #EXTINF:-1 group-title="-",R CHARAPA TV
 http://190.108.83.69:8000/play/a067/index.m3u8
+#EXTINF:-1 group-title="-",R Estacion Tv
+http://190.108.83.69:8000/play/a07k/index.m3u8
 #EXTINF:-1 group-title="-",R Nex Tv
 http://190.108.83.69:8000/play/a06r/index.m3u8
 #EXTINF:-1 group-title="-",R ORIENTAL
@@ -373,10 +371,10 @@ http://181.119.215.61:8000/play/a04t/index.m3u8?hls
 http://181.119.215.61:8000/play/a07u/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a05d.png",TN 23
 http://181.119.215.61:8000/play/a05d/index.m3u8?hls
-#EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a05w.png",TNT Novelas
-http://181.119.215.61:8000/play/a05w/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a056.png",TNT Novelas
 http://181.119.215.61:8000/play/a056/index.m3u8?hls
+#EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a05w.png",TNT Novelas
+http://181.119.215.61:8000/play/a05w/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a05g.png",TV Oriente ESA
 http://181.119.215.61:8000/play/a05g/index.m3u8?hls
 #EXTINF:-1 group-title="-" tvg-logo="http://181.119.215.61:8000/playlist/tvg-logo/a05n.png",TVM25 -  ESA
