@@ -5,8 +5,6 @@ http://190.108.83.69:8000/play/a02o/index.m3u8
 http://190.108.83.69:8000/play/a0c9/index.m3u8
 #EXTINF:-1 group-title="-",A H L1MAX 
 http://190.108.83.69:8000/play/a0bl/index.m3u8
-#EXTINF:-1 group-title="-",A&E HD
-http://190.108.83.69:8000/play/a02y/index.m3u8
 #EXTINF:-1 group-title="-",AMC HD
 http://190.108.83.69:8000/play/a033/index.m3u8
 #EXTINF:-1 group-title="-",AMC SERIES 
@@ -29,8 +27,6 @@ http://190.108.83.69:8000/play/a0al/index.m3u8
 http://190.108.83.69:8000/play/a040/index.m3u8
 #EXTINF:-1 group-title="-",Baby TV
 http://190.108.83.69:8000/play/a022/index.m3u8
-#EXTINF:-1 group-title="-",CCTV-CGTN
-http://190.108.83.69:8000/play/a07h/index.m3u8
 #EXTINF:-1 group-title="-",CHV HD
 http://190.108.83.69:8000/play/a03g/index.m3u8
 #EXTINF:-1 group-title="-",CNN Espanol
@@ -45,8 +41,6 @@ http://190.108.83.69:8000/play/a08g/index.m3u8
 http://190.108.83.69:8000/play/a0aa/index.m3u8
 #EXTINF:-1 group-title="-",Cinecanal HD
 http://190.108.83.69:8000/play/a048/index.m3u8
-#EXTINF:-1 group-title="-",Cinemax
-http://190.108.83.69:8000/play/a06s/index.m3u8
 #EXTINF:-1 group-title="-",Comedy Central HD
 http://190.108.83.69:8000/play/a02z/index.m3u8
 #EXTINF:-1 group-title="-",DHE HD
@@ -69,8 +63,6 @@ http://190.108.83.69:8000/play/a026/index.m3u8
 http://190.108.83.69:8000/play/a036/index.m3u8
 #EXTINF:-1 group-title="-",Disney HD
 http://190.108.83.69:8000/play/a04f/index.m3u8
-#EXTINF:-1 group-title="-",Disney Junior
-http://190.108.83.69:8000/play/a025/index.m3u8
 #EXTINF:-1 group-title="-",E! Entertainment TV
 http://190.108.83.69:8000/play/a02c/index.m3u8
 #EXTINF:-1 group-title="-",ESPN 2 HD
@@ -189,8 +181,6 @@ http://190.108.83.69:8000/play/a00r/index.m3u8
 http://190.108.83.69:8000/play/a046/index.m3u8
 #EXTINF:-1 group-title="-",Nick HD
 http://190.108.83.69:8000/play/a03l/index.m3u8
-#EXTINF:-1 group-title="-",Nuestra Tele
-http://190.108.83.69:8000/play/a00k/index.m3u8
 #EXTINF:-1 group-title="-",OROMAR TV
 http://190.108.83.69:8000/play/a017/index.m3u8
 #EXTINF:-1 group-title="-",Panamericana
