@@ -125,8 +125,6 @@ http://190.108.83.69:8000/play/a0cq/index.m3u8
 http://190.108.83.69:8000/play/a0cp/index.m3u8
 #EXTINF:-1 group-title="-",H LATELE HD
 http://190.108.83.69:8000/play/a0cr/index.m3u8
-#EXTINF:-1 group-title="-",H LATINA HD
-http://190.108.83.69:8000/play/a09a/index.m3u8
 #EXTINF:-1 group-title="-",H TV PERU 
 http://190.108.83.69:8000/play/a092/index.m3u8
 #EXTINF:-1 group-title="-",H- GOURMET HD
